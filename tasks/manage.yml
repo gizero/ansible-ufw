@@ -16,6 +16,7 @@
     log: "{{ item.log | default(omit) }}"
     logging: "{{ item.logging | default(omit) }}"
     name: "{{ item.name | default(omit) }}"
+    port: "{{ item.port | default(omit) }}"
     proto: "{{ item.proto | default(omit) }}"
     route: "{{ item.route | default(omit) }}"
     rule: "{{ item.rule | default(omit) }}"
