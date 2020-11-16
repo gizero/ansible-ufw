@@ -5,8 +5,11 @@
   collections:
     - community.general
   vars:
-    ufw_enabled: false
-    ufw_rules: []
+    ufw_enabled: true
+    ufw_rules:
+      - rule: allow
+        port: '8080'
+        proto: tcp
 
   pre_tasks:
     - name: Update apt cache.

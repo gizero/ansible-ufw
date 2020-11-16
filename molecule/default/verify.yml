@@ -1,0 +1,20 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Register ufw status
+      shell: >
+        set -o pipefail && \
+        ufw status | grep -E '(ALLOW|DENY|REJECT|LIMIT)' | sed -E 's/[ \t]+/ /g'
+      args:
+        executable: /bin/bash
+      register: ufw_status
+      changed_when: false
+
+    - name: Check ufw status
+      assert:
+        that:
+          - '"8080/tcp ALLOW Anywhere " in stdout'
+          - '"Anywhere/tcp ALLOW Anywhere/tcp " not in stdout'
+      vars:
+        stdout: '{{ ufw_status.stdout_lines }}'
